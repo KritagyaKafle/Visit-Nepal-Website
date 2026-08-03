@@ -92,9 +92,20 @@ const places = [
 
 <style>
   .places-section {
-    padding: 8rem 0;
+    padding: 10rem 0;
     position: relative;
-    background: var(--himalayan-night);
+    background: url('https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=2000&auto=format&fit=crop') center/cover fixed;
+  }
+  .places-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 7, 10, 0.85);
+    z-index: 0;
+  }
+  .places-section > .container {
+    position: relative;
+    z-index: 1;
   }
 
   .section-lead-text {
@@ -106,8 +117,12 @@ const places = [
 
   .places-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  :global(.place-image-wrap) {
+    height: 300px !important;
   }
 
   @media (max-width: 1200px) {

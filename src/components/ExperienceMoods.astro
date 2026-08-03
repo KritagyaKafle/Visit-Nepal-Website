@@ -29,7 +29,7 @@ const moods = [
 ];
 ---
 
-<section class="moods-section" id="moods">
+<section class="moods-section section-bg" id="moods">
   <div class="container">
     <div class="section-title-wrap">
       <h2>EXPERIENCE MOODS</h2>
@@ -56,20 +56,19 @@ const moods = [
 
 <style>
   .moods-section {
-    padding: 7rem 0;
-    position: relative;
-    background: linear-gradient(180deg, var(--himalayan-night) 0%, rgba(18, 24, 32, 0.7) 50%, var(--himalayan-night) 100%);
+    padding: 10rem 0;
+    background-image: url('https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?q=80&w=2000&auto=format&fit=crop');
   }
 
   .moods-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
     margin-top: 2rem;
   }
 
   .mood-card {
-    padding: 2.25rem 1.75rem;
+    padding: 2.5rem;
     text-align: center;
     display: flex;
     flex-direction: column;
