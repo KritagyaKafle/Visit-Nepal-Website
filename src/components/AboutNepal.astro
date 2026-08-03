@@ -1,0 +1,123 @@
+---
+import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
+---
+
+<section class="about-section" id="about">
+  <div class="container">
+    <!-- Section Title matching sample.png style -->
+    <div class="section-title-wrap">
+      <h2>ABOUT NEPAL</h2>
+      <div class="section-title-rule"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-lead">
+        <h3 class="about-heading">
+          A Sanctuary of Mountains, Ancient Wisdom & Unrivaled Majesty
+        </h3>
+        <p class="about-text">
+          Nestled between the snowy crests of the world's highest peaks and the verdant valleys of ancient kingdoms, Nepal is a land where nature and spirituality breathe as one. From the birthplace of Lord Buddha in Lumbini to the sacred flame of Pashupatinath, every vista tells a story woven across centuries.
+        </p>
+      </div>
+
+      <div class="about-pillars">
+        <div class="glass-card pillar-card">
+          <Mountain class="pillar-icon" />
+          <h4>Eight-Thousanders</h4>
+          <p>Home to eight of the world's fourteen highest mountain peaks including Mount Everest.</p>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <Flame class="pillar-icon" />
+          <h4>Sacred Heritage</h4>
+          <p>Millennia of living traditions, golden stupas, and timeless wooden pagoda temples.</p>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <Sun class="pillar-icon" />
+          <h4>Peaceful Gardens</h4>
+          <p>Serene lakes, sacred stupa courtyards, and tranquil Himalayan sunrise vistas.</p>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <Heart class="pillar-icon" />
+          <h4>Warm Hospitality</h4>
+          <p>Experience Namaste — a genuine greeting of respect and soul-deep welcoming spirit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding: 8rem 0;
+    position: relative;
+    background: linear-gradient(180deg, var(--himalayan-night) 0%, rgba(10, 14, 20, 0.95) 50%, var(--himalayan-night) 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+    color: var(--snow-white);
+  }
+
+  .about-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--mist-slate);
+  }
+
+  .about-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .pillar-card {
+    padding: 1.75rem;
+  }
+
+  .pillar-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--temple-gold);
+    margin-bottom: 1rem;
+  }
+
+  .pillar-card h4 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--snow-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .about-pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

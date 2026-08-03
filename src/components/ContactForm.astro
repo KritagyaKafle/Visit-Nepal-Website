@@ -1,0 +1,224 @@
+---
+import { Send, MapPin, Mail, Compass } from '@lucide/astro';
+---
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Info Side -->
+      <div class="contact-info">
+        <span class="contact-badge glass-pill">CONNECT WITH NEPAL</span>
+        <h2 class="contact-title">Begin Your Himalayan Story</h2>
+        <p class="contact-text">
+          Have questions about destinations, local culture, sacred landmarks, or seasonal mountain vistas? Send an inquiry and let us guide your exploration.
+        </p>
+
+        <div class="contact-meta">
+          <div class="meta-item">
+            <MapPin class="meta-icon" />
+            <div>
+              <h5>Destination Region</h5>
+              <p>Federal Democratic Republic of Nepal</p>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <Mail class="meta-icon" />
+            <div>
+              <h5>Inquiries & Information</h5>
+              <p>explore@visitnepal.org</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Discover CTA -->
+        <div class="cta-box">
+          <h3>Ready to discover sacred peaks?</h3>
+          <a href="#places" class="glass-button cta-btn">
+            <Compass class="btn-icon" />
+            Discover Nepal
+          </a>
+        </div>
+      </div>
+
+      <!-- Frosted Glass Form (Inspired by sample.png) -->
+      <div class="glass-card contact-form-card">
+        <h3 class="form-title">Leave an Inquiry</h3>
+        <p class="form-sub">We welcome travel inquiries, cultural questions, and photography feedback.</p>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Visit Nepal!');">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" required placeholder="e.g. Maya Lin" class="glass-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" required placeholder="maya@example.com" class="glass-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" rows="4" required placeholder="Tell us about the destinations or experiences you wish to explore..." class="glass-input glass-textarea"></textarea>
+          </div>
+
+          <button type="submit" class="glass-button form-submit-btn">
+            <span>Send Message</span>
+            <Send class="submit-icon" />
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: 8rem 0;
+    position: relative;
+    background: linear-gradient(180deg, var(--himalayan-night) 0%, rgba(10, 14, 20, 0.95) 100%);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-badge {
+    font-size: 0.75rem;
+    color: var(--temple-gold);
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin-bottom: 1.25rem;
+    color: var(--snow-white);
+  }
+
+  .contact-text {
+    font-size: 1.125rem;
+    color: var(--mist-slate);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .meta-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--temple-gold);
+  }
+
+  .meta-item h5 {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .meta-item p {
+    font-size: 1rem;
+    color: var(--snow-white);
+    margin: 0;
+  }
+
+  .cta-box {
+    padding: 2rem;
+    background: rgba(215, 168, 77, 0.05);
+    border: 1px solid var(--glass-border-gold);
+    border-radius: var(--radius-md);
+  }
+
+  .cta-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Form Card */
+  .contact-form-card {
+    padding: 3rem 2.5rem;
+    background: rgba(10, 14, 20, 0.7);
+  }
+
+  .form-title {
+    font-size: 1.75rem;
+    color: var(--snow-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-sub {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: 0.8125rem;
+    color: var(--mist-slate);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .glass-textarea {
+    resize: vertical;
+  }
+
+  .form-submit-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .submit-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

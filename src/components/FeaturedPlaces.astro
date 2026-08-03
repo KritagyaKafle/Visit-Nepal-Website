@@ -1,0 +1,124 @@
+---
+import PlaceCard from './PlaceCard.astro';
+
+const places = [
+  {
+    id: 'pashupatinath',
+    name: 'Pashupatinath',
+    subtitle: 'Sacred Temple Sanctuary',
+    mood: 'Sacred',
+    description: 'One of the most sacred Hindu temple complexes on the bank of the holy Bagmati River, renowned for its golden pagoda architecture and eternal spiritual rituals.',
+    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'swayambhu',
+    name: 'Swayambhunath',
+    subtitle: 'The Monkey Temple Stupa',
+    mood: 'Heritage',
+    description: 'Perched high on a hill overlooking Kathmandu Valley, this ancient religious complex features the legendary all-seeing eyes of Buddha and fluttering prayer flags.',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'lumbini',
+    name: 'Lumbini',
+    subtitle: 'Birthplace of Lord Buddha',
+    mood: 'Peace',
+    description: 'A global pilgrimage site and UNESCO World Heritage sanctuary featuring the Mayadevi Temple, sacred pond, and international monastic zone dedicated to world peace.',
+    image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'everest',
+    name: 'Mount Everest & Khumbu',
+    subtitle: 'Roof of the World',
+    mood: 'Majesty',
+    description: 'The pinnacle of global alpine splendor. Soaring 8,848 meters into the sky, the Khumbu region offers legendary vistas, Sherpa culture, and glacial valleys.',
+    image: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'annapurna',
+    name: 'Annapurna & Machapuchare',
+    subtitle: 'Fishtail Mountain Vistas',
+    mood: 'Sunrise',
+    description: 'Iconic sacred peaks crowned by the holy Machapuchare. Experience golden sunrises over snow-capped ranges and terraced mountain villages.',
+    image: 'https://images.unsplash.com/photo-1575999422409-5a50e50e9323?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'pokhara',
+    name: 'Pokhara & Phewa Lake',
+    subtitle: 'Jewel of the Valley',
+    mood: 'Tranquility',
+    description: 'A picturesque lake city mirroring the Annapurna range on calm waters, featuring peaceful boat rides, serene island temples, and lakeside cafes.',
+    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'bhaktapur',
+    name: 'Bhaktapur Durbar Square',
+    subtitle: 'City of Living History',
+    mood: 'Culture',
+    description: 'An open-air museum of Newari art, 55-Window Palace, intricate woodcarvings, and ancient brick-paved plazas preserving medieval Nepalese culture.',
+    image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    id: 'chitwan',
+    name: 'Chitwan National Park',
+    subtitle: 'Subtropical Wilderness',
+    mood: 'Wilderness',
+    description: 'A dense subtropical sanctuary protecting the rare one-horned rhinoceros, Bengal tiger, exotic birds, and peaceful river canoe trails.',
+    image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?q=80&w=1000&auto=format&fit=crop'
+  }
+];
+---
+
+<section class="places-section" id="places">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-title-wrap">
+      <h2>FEATURED DESTINATIONS</h2>
+      <div class="section-title-rule"></div>
+    </div>
+
+    <p class="section-lead-text">
+      Explore eight extraordinary destinations across Nepal — from ancient sacred shrines in the valleys to high mountain horizons.
+    </p>
+
+    <!-- Places Grid -->
+    <div class="places-grid">
+      {places.map((place) => (
+        <PlaceCard {...place} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .places-section {
+    padding: 8rem 0;
+    position: relative;
+    background: var(--himalayan-night);
+  }
+
+  .section-lead-text {
+    font-size: 1.125rem;
+    color: var(--mist-slate);
+    margin-bottom: 3.5rem;
+    max-width: 65ch;
+  }
+
+  .places-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 1200px) {
+    .places-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .places-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,51 @@
+:root {
+  /* Color Palette - Nepal Cinematic */
+  --himalayan-night: #05070a;
+  --himalayan-dark: #0a0e14;
+  --himalayan-surface: #121820;
+  
+  --mist-slate: #aeb8b5;
+  --mist-light: #d0d8d5;
+  
+  --temple-gold: #d7a84d;
+  --temple-gold-glow: rgba(215, 168, 77, 0.25);
+  
+  --prayer-red: #b8322a;
+  --prayer-red-glow: rgba(184, 50, 42, 0.3);
+  
+  --lumbini-sand: #e8d6a8;
+  --snow-white: #f4f0e8;
+  --pure-white: #ffffff;
+  
+  --text-primary: #f4f0e8;
+  --text-secondary: #aeb8b5;
+  --text-muted: #6e7976;
+  
+  /* Typography */
+  --font-display: 'Libre Bodoni', serif;
+  --font-body: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Glass Tokens */
+  --glass-bg-dark: rgba(5, 7, 10, 0.55);
+  --glass-bg-card: rgba(18, 24, 32, 0.45);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(174, 184, 181, 0.15);
+  --glass-border-gold: rgba(215, 168, 77, 0.3);
+  --glass-blur: 16px;
+  --glass-blur-heavy: 24px;
+  
+  /* Spacing & Layout */
+  --container-max: 1400px;
+  --header-height: 80px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  /* Animation / Transitions */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: 200ms var(--ease-smooth);
+  --transition-normal: 400ms var(--ease-cinematic);
+  --transition-slow: 700ms var(--ease-cinematic);
+}

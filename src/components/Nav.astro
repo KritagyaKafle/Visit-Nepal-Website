@@ -1,0 +1,117 @@
+---
+import { Compass } from '@lucide/astro';
+---
+
+<header class="nav-header">
+  <div class="container">
+    <nav class="nav-bar glass-panel">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" aria-label="Visit Nepal Home">
+        <Compass class="logo-icon" />
+        <span class="brand-text">VISIT NEPAL</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#places" class="nav-link">Places</a></li>
+        <li><a href="#journey" class="nav-link">Journey</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Primary Action CTA -->
+      <a href="#places" class="glass-button nav-cta">
+        Discover Nepal
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-header {
+    position: fixed;
+    top: 1.25rem;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(5, 7, 10, 0.65);
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--snow-white);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: color var(--transition-fast);
+  }
+
+  .brand-logo:hover {
+    color: var(--temple-gold);
+  }
+
+  .logo-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--temple-gold);
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: color var(--transition-fast);
+    position: relative;
+    padding: 0.25rem 0;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--temple-gold);
+    transition: width var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--snow-white);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    padding: 10px 22px;
+    font-size: 0.8125rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+  }
+</style>

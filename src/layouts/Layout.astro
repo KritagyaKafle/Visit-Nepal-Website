@@ -1,23 +1,41 @@
+---
+import '../styles/global.css';
+import '@fontsource/libre-bodoni/400.css';
+import '@fontsource/libre-bodoni/700.css';
+import '@fontsource/libre-bodoni/400-italic.css';
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/500.css';
+import '@fontsource/inter-tight/600.css';
+import '@fontsource/inter-tight/700.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Visit Nepal — Experience the Majesty of the Himalayas & Ancient Heritage",
+  description = "Immerse yourself in Nepal's sacred temples, soaring Himalayan peaks, and timeless culture. Discover 8 extraordinary destinations with cinematic elegance."
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Visit Nepal, Nepal Tourism, Himalayas, Everest, Annapurna, Pashupatinath, Swayambhu, Lumbini, Pokhara, Travel Nepal" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

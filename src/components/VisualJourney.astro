@@ -1,0 +1,195 @@
+---
+const steps = [
+  {
+    phase: 'Phase I',
+    title: 'Kathmandu Cultural Valley',
+    subtitle: 'Pashupatinath • Swayambhu • Bhaktapur',
+    desc: 'Begin your immersion surrounded by ancient pagodas, golden stupas, and vibrant Newari artistry.',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop'
+  },
+  {
+    phase: 'Phase II',
+    title: 'Serene Lakes & Valleys',
+    subtitle: 'Pokhara • Phewa Lake • Begnas',
+    desc: 'Unwind along quiet lake waters mirroring holy mountain peaks under clear Himalayan skies.',
+    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop'
+  },
+  {
+    phase: 'Phase III',
+    title: 'Annapurna Sunrise Ranges',
+    subtitle: 'Machapuchare • Sarangkot • Sanctuary',
+    desc: 'Witness golden dawn break over snow-capped ridges and ancient terraced mountain slopes.',
+    image: 'https://images.unsplash.com/photo-1575999422409-5a50e50e9323?q=80&w=800&auto=format&fit=crop'
+  },
+  {
+    phase: 'Phase IV',
+    title: 'Everest Alpine Majesty',
+    subtitle: 'Khumbu Valley • Namche • Kala Patthar',
+    desc: 'Stand before the world’s highest crests in the heart of Sherpa mountain heritage.',
+    image: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=800&auto=format&fit=crop'
+  }
+];
+---
+
+<section class="journey-section" id="journey">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2>VISUAL JOURNEY</h2>
+      <div class="section-title-rule"></div>
+    </div>
+
+    <p class="journey-intro">
+      Follow the visual flow through Nepal's landscape elevations — from golden valley heritage to alpine snow lines.
+    </p>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+
+      {steps.map((step, index) => (
+        <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+          <div class="timeline-dot"></div>
+          
+          <div class="glass-card timeline-card">
+            <span class="timeline-phase">{step.phase}</span>
+            <h3 class="timeline-title">{step.title}</h3>
+            <span class="timeline-sub">{step.subtitle}</span>
+            <p class="timeline-desc">{step.desc}</p>
+            <div class="timeline-img-wrap">
+              <img src={step.image} alt={step.title} class="timeline-img" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey-section {
+    padding: 8rem 0;
+    position: relative;
+    background: var(--himalayan-night);
+  }
+
+  .journey-intro {
+    font-size: 1.125rem;
+    color: var(--mist-slate);
+    margin-bottom: 4rem;
+    max-width: 60ch;
+  }
+
+  .timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--temple-gold) 0%, rgba(174, 184, 181, 0.2) 100%);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    width: 50%;
+  }
+
+  .timeline-item.left {
+    left: 0;
+    padding-right: 3rem;
+  }
+
+  .timeline-item.right {
+    left: 50%;
+    padding-left: 3rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    top: 2rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--temple-gold);
+    box-shadow: 0 0 12px var(--temple-gold);
+    z-index: 2;
+  }
+
+  .timeline-item.left .timeline-dot {
+    right: -7px;
+  }
+
+  .timeline-item.right .timeline-dot {
+    left: -7px;
+  }
+
+  .timeline-card {
+    padding: 1.75rem;
+  }
+
+  .timeline-phase {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--temple-gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-title {
+    font-size: 1.5rem;
+    color: var(--snow-white);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-sub {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .timeline-img-wrap {
+    width: 100%;
+    height: 180px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .timeline-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-line {
+      left: 20px;
+    }
+
+    .timeline-item {
+      width: 100%;
+      padding-left: 3.5rem !important;
+      padding-right: 0 !important;
+      left: 0 !important;
+    }
+
+    .timeline-dot {
+      left: 13px !important;
+    }
+  }
+</style>

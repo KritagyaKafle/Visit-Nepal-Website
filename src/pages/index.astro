@@ -1,11 +1,80 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import AboutNepal from '../components/AboutNepal.astro';
+import FeaturedPlaces from '../components/FeaturedPlaces.astro';
+import ExperienceMoods from '../components/ExperienceMoods.astro';
+import VisualJourney from '../components/VisualJourney.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Visit Nepal — Land of Sacred Peaks & Timeless Spirit">
+  <!-- Header Nav -->
+  <Nav />
+
+  <main>
+    <!-- 1. Hero Section -->
+    <Hero />
+
+    <!-- 2. About Nepal Section -->
+    <AboutNepal />
+
+    <!-- 3. Featured Places (8 Destinations) -->
+    <FeaturedPlaces />
+
+    <!-- 4. Experience Moods Section -->
+    <ExperienceMoods />
+
+    <!-- 5. Visual Journey Section -->
+    <VisualJourney />
+
+    <!-- 6 & 7. Contact Form & Final CTA -->
+    <ContactForm />
+  </main>
+
+  <!-- 8. Footer -->
+  <Footer />
 </Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Smooth Stagger Reveals for Sections
+  document.addEventListener('DOMContentLoaded', () => {
+    // Fade reveal for glass cards
+    const glassCards = document.querySelectorAll('.glass-card');
+    glassCards.forEach((card) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    });
+
+    // Reveal for section titles
+    const titles = document.querySelectorAll('.section-title-wrap');
+    titles.forEach((title) => {
+      gsap.from(title, {
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 90%'
+        },
+        opacity: 0,
+        x: -40,
+        duration: 1,
+        ease: 'power3.out'
+      });
+    });
+  });
+</script>
