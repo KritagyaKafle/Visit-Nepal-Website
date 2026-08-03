@@ -1,204 +1,143 @@
 ---
-import { Send, MapPin, Mail, Compass } from '@lucide/astro';
+import { Send, Compass } from '@lucide/astro';
 ---
 
 <section class="contact-section section-bg" id="contact">
   <div class="container">
-    <div class="contact-grid">
-      <!-- Info Side -->
-      <div class="contact-info">
-        <span class="contact-badge glass-pill">CONNECT WITH NEPAL</span>
+    <div class="contact-card-wrap glass-card">
+      <div class="contact-header">
+        <div class="brand-emblem">
+          <Compass class="emblem-icon" />
+        </div>
+        <span class="contact-badge">INQUIRIES & DISCOVERY</span>
         <h2 class="contact-title">Begin Your Himalayan Story</h2>
-        <p class="contact-text">
-          Have questions about destinations, local culture, sacred landmarks, or seasonal mountain vistas? Send an inquiry and let us guide your exploration.
-        </p>
-
-        <div class="contact-meta">
-          <div class="meta-item">
-            <MapPin class="meta-icon" />
-            <div>
-              <h5>Destination Region</h5>
-              <p>Federal Democratic Republic of Nepal</p>
-            </div>
-          </div>
-
-          <div class="meta-item">
-            <Mail class="meta-icon" />
-            <div>
-              <h5>Inquiries & Information</h5>
-              <p>explore@visitnepal.org</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Big Discover CTA -->
-        <div class="cta-box">
-          <h3>Ready to discover sacred peaks?</h3>
-          <a href="#places" class="glass-button cta-btn">
-            <Compass class="btn-icon" />
-            Discover Nepal
-          </a>
-        </div>
+        <p class="contact-sub">Have questions about destinations or landmarks? Connect with us.</p>
       </div>
 
-      <!-- Frosted Glass Form (Inspired by sample.png) -->
-      <div class="glass-card contact-form-card">
-        <h3 class="form-title">Leave an Inquiry</h3>
-        <p class="form-sub">We welcome travel inquiries, cultural questions, and photography feedback.</p>
-
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Visit Nepal!');">
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Visit Nepal!');">
+        <div class="form-row">
           <div class="form-group">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" id="name" required placeholder="e.g. Maya Lin" class="glass-input" />
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" required placeholder="Maya Lin" class="glass-input" />
           </div>
-
           <div class="form-group">
             <label for="email" class="form-label">Email Address</label>
             <input type="email" id="email" required placeholder="maya@example.com" class="glass-input" />
           </div>
+        </div>
 
-          <div class="form-group">
-            <label for="message" class="form-label">Your Message</label>
-            <textarea id="message" rows="4" required placeholder="Tell us about the destinations or experiences you wish to explore..." class="glass-input glass-textarea"></textarea>
-          </div>
+        <div class="form-group">
+          <label for="message" class="form-label">Inquiry Message</label>
+          <textarea id="message" rows="3" required placeholder="Share the landmarks or regions you wish to discover..." class="glass-input glass-textarea"></textarea>
+        </div>
 
-          <button type="submit" class="glass-button form-submit-btn">
-            <span>Send Message</span>
-            <Send class="submit-icon" />
-          </button>
-        </form>
-      </div>
+        <button type="submit" class="glass-button form-submit-btn">
+          <span>Discover Nepal</span>
+          <Send class="submit-icon" />
+        </button>
+      </form>
     </div>
   </div>
 </section>
 
 <style>
   .contact-section {
-    padding: 10rem 0;
-    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2000&auto=format&fit=crop');
+    padding: 7rem 0 9rem 0;
+    position: relative;
+    background: url('/images/hero-himalayas.jpg') center/cover fixed;
   }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,7,10,0.92) 0%, rgba(10,14,20,0.85) 50%, rgba(5,7,10,0.95) 100%);
+    z-index: 0;
+  }
+
+  .contact-section > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-card-wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3rem 3.5rem;
+    background: rgba(10, 14, 20, 0.78);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--glass-border-gold);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(215, 168, 77, 0.15);
+  }
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .brand-emblem {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(215, 168, 77, 0.12);
+    border: 1px solid var(--glass-border-gold);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem auto;
+  }
+
+  .emblem-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--temple-gold);
   }
 
   .contact-badge {
     font-size: 0.75rem;
     color: var(--temple-gold);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     font-weight: 600;
-    display: inline-block;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
+    display: block;
   }
 
   .contact-title {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    margin-bottom: 1.25rem;
-    color: var(--snow-white);
-  }
-
-  .contact-text {
-    font-size: 1.125rem;
-    color: var(--mist-slate);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-  }
-
-  .contact-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .meta-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--temple-gold);
-  }
-
-  .meta-item h5 {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    margin-bottom: 0.2rem;
-  }
-
-  .meta-item p {
-    font-size: 1rem;
-    color: var(--snow-white);
-    margin: 0;
-  }
-
-  .cta-box {
-    padding: 2rem;
-    background: rgba(215, 168, 77, 0.05);
-    border: 1px solid var(--glass-border-gold);
-    border-radius: var(--radius-md);
-  }
-
-  .cta-box h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .cta-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .btn-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  /* Form Card */
-  .contact-form-card {
-    padding: 3rem 2.5rem;
-    background: rgba(10, 14, 20, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-  }
-
-  .form-title {
-    font-size: 1.75rem;
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
     color: var(--snow-white);
     margin-bottom: 0.5rem;
   }
 
-  .form-sub {
+  .contact-sub {
     font-size: 0.9375rem;
     color: var(--text-muted);
-    margin-bottom: 2rem;
+    margin: 0;
   }
 
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .form-label {
     font-size: 0.8125rem;
     color: var(--mist-slate);
     font-weight: 500;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
 
   .glass-textarea {
@@ -208,7 +147,8 @@ import { Send, MapPin, Mail, Compass } from '@lucide/astro';
   .form-submit-btn {
     width: 100%;
     justify-content: center;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 16px 32px;
   }
 
   .submit-icon {
@@ -216,10 +156,12 @@ import { Send, MapPin, Mail, Compass } from '@lucide/astro';
     height: 16px;
   }
 
-  @media (max-width: 992px) {
-    .contact-grid {
+  @media (max-width: 640px) {
+    .form-row {
       grid-template-columns: 1fr;
-      gap: 3rem;
+    }
+    .contact-card-wrap {
+      padding: 2.25rem 1.75rem;
     }
   }
 </style>

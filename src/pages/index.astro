@@ -4,39 +4,74 @@ import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import AboutNepal from '../components/AboutNepal.astro';
 import FeaturedPlaces from '../components/FeaturedPlaces.astro';
-import ExperienceMoods from '../components/ExperienceMoods.astro';
 import VisualJourney from '../components/VisualJourney.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Visit Nepal — Land of Sacred Peaks & Timeless Spirit">
+<Layout title="Visit Nepal — Experience Sacred Peaks & Heritage">
   <!-- Header Nav -->
   <Nav />
 
   <main>
-    <!-- 1. Hero Section -->
-    <Hero />
+    <!-- Continuous Canvas Frame Animation Wrapper spanning Hero AND About Nepal -->
+    <div class="hero-about-wrapper" id="heroAboutWrapper">
+      <div class="continuous-canvas-container">
+        <canvas id="continuousCanvas" class="continuous-frame-canvas"></canvas>
+        <div class="continuous-canvas-overlay"></div>
+      </div>
 
-    <!-- 2. About Nepal Section -->
-    <AboutNepal />
+      <!-- 1. Hero Section -->
+      <Hero />
 
-    <!-- 3. Featured Places (8 Destinations) -->
+      <!-- 2. About Nepal Section -->
+      <AboutNepal />
+    </div>
+
+    <!-- 3. Featured Places (Side-Scroll 3D Tilted Grid) -->
     <FeaturedPlaces />
 
-    <!-- 4. Experience Moods Section -->
-    <ExperienceMoods />
-
-    <!-- 5. Visual Journey Section -->
+    <!-- 4. Visual Journey Section -->
     <VisualJourney />
 
-    <!-- 6 & 7. Contact Form & Final CTA -->
+    <!-- 5. Contact Form & Final CTA -->
     <ContactForm />
   </main>
 
-  <!-- 8. Footer -->
+  <!-- 6. Footer -->
   <Footer />
 </Layout>
+
+<style>
+  .hero-about-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .continuous-canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .continuous-frame-canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) contrast(1.15) saturate(1.1);
+  }
+
+  .continuous-canvas-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 7, 10, 0.35) 0%, rgba(5, 7, 10, 0.65) 60%, rgba(5, 7, 10, 0.98) 100%);
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';
@@ -44,36 +79,124 @@ import Footer from '../components/Footer.astro';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Smooth Stagger Reveals for Sections
   document.addEventListener('DOMContentLoaded', () => {
-    // Fade reveal for glass cards
+    // --- 1. CONTINUOUS CANVAS FRAME SCROLL ANIMATION (Hero + About Nepal) ---
+    const canvas = document.getElementById('continuousCanvas') as HTMLCanvasElement;
+    const wrapper = document.getElementById('heroAboutWrapper');
+
+    if (canvas && wrapper) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const frameCount = 36;
+        const currentFrame = (index: number) => `/frames/frame_${(index + 1).toString().padStart(3, '0')}.jpg`;
+
+        const images: HTMLImageElement[] = [];
+        const sequence = { frame: 0 };
+
+        const resizeCanvas = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          renderFrame();
+        };
+
+        const renderFrame = () => {
+          const img = images[sequence.frame];
+          if (img && img.complete) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio = Math.max(hRatio, vRatio);
+            const centerShift_x = (canvas.width - img.width * ratio) / 2;
+            const centerShift_y = (canvas.height - img.height * ratio) / 2;
+            
+            ctx.drawImage(img, 0, 0, img.width, img.height, centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+          }
+        };
+
+        let loadedCount = 0;
+        for (let i = 0; i < frameCount; i++) {
+          const img = new Image();
+          img.src = currentFrame(i);
+          img.onload = () => {
+            loadedCount++;
+            if (loadedCount === 1) renderFrame();
+          };
+          images.push(img);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+          // Continuous scrub spanning both Hero AND About Nepal!
+          gsap.to(sequence, {
+            frame: frameCount - 1,
+            snap: 'frame',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: wrapper,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.5
+            },
+            onUpdate: renderFrame
+          });
+        }
+      }
+    }
+
+    // --- 2. FEATURED DESTINATIONS (GSAP Scrubbed 3D Side-Scroll Track) ---
+    const track = document.getElementById('tiltedGridTrack');
+    if (track) {
+      const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 120);
+
+      gsap.to(track, {
+        x: getScrollAmount,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#places',
+          start: 'top top',
+          end: () => `+=${track.scrollWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    }
+
+    // --- 3. VISUAL JOURNEY (Timeline Progress Line Scrub) ---
+    const timelineLine = document.querySelector('.timeline-line');
+    if (timelineLine) {
+      gsap.fromTo(timelineLine,
+        { scaleY: 0, transformOrigin: 'top center' },
+        {
+          scrollTrigger: {
+            trigger: '.timeline-container',
+            start: 'top 70%',
+            end: 'bottom 80%',
+            scrub: true
+          },
+          scaleY: 1,
+          ease: 'none'
+        }
+      );
+    }
+
+    // --- 4. STAGGERED REVEALS ---
     const glassCards = document.querySelectorAll('.glass-card');
     glassCards.forEach((card) => {
       gsap.from(card, {
         scrollTrigger: {
           trigger: card,
-          start: 'top 85%',
+          start: 'top 88%',
           toggleActions: 'play none none reverse'
         },
         opacity: 0,
-        y: 30,
+        y: 35,
         duration: 0.8,
         ease: 'power2.out'
-      });
-    });
-
-    // Reveal for section titles
-    const titles = document.querySelectorAll('.section-title-wrap');
-    titles.forEach((title) => {
-      gsap.from(title, {
-        scrollTrigger: {
-          trigger: title,
-          start: 'top 90%'
-        },
-        opacity: 0,
-        x: -40,
-        duration: 1,
-        ease: 'power3.out'
       });
     });
   });

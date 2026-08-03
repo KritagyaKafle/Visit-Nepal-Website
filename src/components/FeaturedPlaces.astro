@@ -1,75 +1,75 @@
 ---
-import PlaceCard from './PlaceCard.astro';
+import ScrollTiltedGrid from './ui/scroll-tilted-grid.astro';
 
 const places = [
   {
     id: 'pashupatinath',
     name: 'Pashupatinath',
-    subtitle: 'Sacred Temple Sanctuary',
+    subtitle: 'Sacred Hindu Temple Sanctuary',
     mood: 'Sacred',
-    description: 'One of the most sacred Hindu temple complexes on the bank of the holy Bagmati River, renowned for its golden pagoda architecture and eternal spiritual rituals.',
-    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop'
+    description: 'Ancient pagoda temple complex on the Bagmati River banks with sacred golden roofs & evening Aarati ceremonies.',
+    image: '/images/pashupatinath.jpg'
   },
   {
     id: 'swayambhu',
-    name: 'Swayambhunath',
-    subtitle: 'The Monkey Temple Stupa',
+    name: 'Swayambhunath Stupa',
+    subtitle: 'The Ancient Monkey Temple',
     mood: 'Heritage',
-    description: 'Perched high on a hill overlooking Kathmandu Valley, this ancient religious complex features the legendary all-seeing eyes of Buddha and fluttering prayer flags.',
-    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1000&auto=format&fit=crop'
+    description: 'Iconic 5th-century Buddhist stupa atop a Kathmandu hilltop with Buddha eyes looking across the valley.',
+    image: '/images/swayambhu.jpg'
   },
   {
     id: 'lumbini',
-    name: 'Lumbini',
+    name: 'Lumbini Sacred Garden',
     subtitle: 'Birthplace of Lord Buddha',
     mood: 'Peace',
-    description: 'A global pilgrimage site and UNESCO World Heritage sanctuary featuring the Mayadevi Temple, sacred pond, and international monastic zone dedicated to world peace.',
-    image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1000&auto=format&fit=crop'
+    description: 'UNESCO World Heritage sanctuary housing the Mayadevi Temple, Ashoka Pillar, and serene peace gardens.',
+    image: '/images/lumbini.jpg'
   },
   {
     id: 'everest',
     name: 'Mount Everest & Khumbu',
-    subtitle: 'Roof of the World',
+    subtitle: 'Sagarmatha • 8,848 Meters',
     mood: 'Majesty',
-    description: 'The pinnacle of global alpine splendor. Soaring 8,848 meters into the sky, the Khumbu region offers legendary vistas, Sherpa culture, and glacial valleys.',
-    image: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1000&auto=format&fit=crop'
+    description: 'The highest summit on Earth soaring into the azure sky above the Khumbu glacier and Sherpa passes.',
+    image: '/images/everest.jpg'
   },
   {
     id: 'annapurna',
     name: 'Annapurna & Machapuchare',
-    subtitle: 'Fishtail Mountain Vistas',
+    subtitle: 'Sacred Fishtail Mountain Peak',
     mood: 'Sunrise',
-    description: 'Iconic sacred peaks crowned by the holy Machapuchare. Experience golden sunrises over snow-capped ranges and terraced mountain villages.',
-    image: 'https://images.unsplash.com/photo-1575999422409-5a50e50e9323?q=80&w=1000&auto=format&fit=crop'
+    description: 'Untouched Holy Peak of Machapuchare towering over the Annapurna sanctuary with golden dawn rays.',
+    image: '/images/annapurna.jpg'
   },
   {
     id: 'pokhara',
     name: 'Pokhara & Phewa Lake',
-    subtitle: 'Jewel of the Valley',
+    subtitle: 'Himalayan Mirror Waters',
     mood: 'Tranquility',
-    description: 'A picturesque lake city mirroring the Annapurna range on calm waters, featuring peaceful boat rides, serene island temples, and lakeside cafes.',
-    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1000&auto=format&fit=crop'
+    description: 'Tranquil alpine lake reflecting snowcapped Himalayan ranges, featuring colorful wooden boats & island temples.',
+    image: '/images/pokhara.jpg'
   },
   {
     id: 'bhaktapur',
     name: 'Bhaktapur Durbar Square',
-    subtitle: 'City of Living History',
+    subtitle: 'City of Devotees & Living Art',
     mood: 'Culture',
-    description: 'An open-air museum of Newari art, 55-Window Palace, intricate woodcarvings, and ancient brick-paved plazas preserving medieval Nepalese culture.',
-    image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1000&auto=format&fit=crop'
+    description: 'Preserved medieval kingdom square featuring the 55-Window Palace and 5-story Nyatapola Temple.',
+    image: '/images/bhaktapur.jpg'
   },
   {
     id: 'chitwan',
     name: 'Chitwan National Park',
-    subtitle: 'Subtropical Wilderness',
+    subtitle: 'Subtropical Jungle Wildlife',
     mood: 'Wilderness',
-    description: 'A dense subtropical sanctuary protecting the rare one-horned rhinoceros, Bengal tiger, exotic birds, and peaceful river canoe trails.',
-    image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?q=80&w=1000&auto=format&fit=crop'
+    description: 'Unspoiled UNESCO rainforest refuge protecting the Great One-Horned Rhinoceros and river canoe safaris.',
+    image: '/images/chitwan.jpg'
   }
 ];
 ---
 
-<section class="places-section" id="places">
+<section class="places-section section-bg" id="places">
   <div class="container">
     <!-- Section Header -->
     <div class="section-title-wrap">
@@ -77,63 +77,28 @@ const places = [
       <div class="section-title-rule"></div>
     </div>
 
-    <p class="section-lead-text">
-      Explore eight extraordinary destinations across Nepal — from ancient sacred shrines in the valleys to high mountain horizons.
-    </p>
-
-    <!-- Places Grid -->
-    <div class="places-grid">
-      {places.map((place) => (
-        <PlaceCard {...place} />
-      ))}
-    </div>
+    <!-- Side-Scroll 3D Tilted Grid Component -->
+    <ScrollTiltedGrid items={places} />
   </div>
 </section>
 
 <style>
   .places-section {
-    padding: 10rem 0;
+    padding: 8rem 0;
     position: relative;
-    background: url('https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=2000&auto=format&fit=crop') center/cover fixed;
+    background: url('/images/hero-himalayas.jpg') center/cover fixed;
   }
+
   .places-section::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(5, 7, 10, 0.85);
+    background: linear-gradient(180deg, rgba(5,7,10,0.95) 0%, rgba(10,14,20,0.85) 50%, rgba(5,7,10,0.95) 100%);
     z-index: 0;
   }
+
   .places-section > .container {
     position: relative;
     z-index: 1;
-  }
-
-  .section-lead-text {
-    font-size: 1.125rem;
-    color: var(--mist-slate);
-    margin-bottom: 3.5rem;
-    max-width: 65ch;
-  }
-
-  .places-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-
-  :global(.place-image-wrap) {
-    height: 300px !important;
-  }
-
-  @media (max-width: 1200px) {
-    .places-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .places-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

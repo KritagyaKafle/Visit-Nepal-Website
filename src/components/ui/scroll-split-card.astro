@@ -1,0 +1,297 @@
+---
+interface SplitCardItem {
+  title: string;
+  description: string;
+  bgColor?: string;
+  textColor?: string;
+}
+
+interface Props {
+  imageSrc?: string;
+  cards?: SplitCardItem[];
+}
+
+const {
+  imageSrc = "/images/hero-himalayas.jpg",
+  cards = [
+    {
+      title: "8-Thousanders & Alpine Summits",
+      description: "Home to Mount Everest (8,848m) and eight of the world's fourteen highest mountain summits.",
+      bgColor: "#0f172a",
+      textColor: "#f4f0e8"
+    },
+    {
+      title: "Sacred Pagodas & Living Shrines",
+      description: "Millennia of UNESCO heritage shrines including Pashupatinath golden roofs & Swayambhu eyes.",
+      bgColor: "#b88628",
+      textColor: "#ffffff"
+    },
+    {
+      title: "Peace Gardens & Mirror Lakes",
+      description: "The birthplace of Lord Buddha in Lumbini and serene alpine lake reflections in Pokhara.",
+      bgColor: "#1c1c1c",
+      textColor: "#ffffff"
+    }
+  ]
+} = Astro.props;
+---
+
+<div class="scroll-split-card-section" id="splitCardSection">
+  <div class="split-viewport">
+    
+    <!-- Full Background Image that splits open on scroll -->
+    <div class="split-image-container" id="splitImgContainer">
+      <div class="split-panel split-panel-left" id="splitLeft">
+        <img src={imageSrc} alt="Himalayas Split Left" class="split-img" />
+        <div class="panel-overlay"></div>
+      </div>
+
+      <div class="split-panel split-panel-right" id="splitRight">
+        <img src={imageSrc} alt="Himalayas Split Right" class="split-img" />
+        <div class="panel-overlay"></div>
+      </div>
+
+      <div class="split-initial-badge" id="splitInitialBadge">
+        <span class="badge-ring"></span>
+        <span>SCROLL TO SPLIT LANDSCAPE</span>
+      </div>
+    </div>
+
+    <!-- Text Cards Revealed inside the split opening -->
+    <div class="split-cards-revealer" id="splitCardsRevealer">
+      {cards.map((card, idx) => (
+        <div 
+          class="split-card-box" 
+          style={`background-color: ${card.bgColor}; color: ${card.textColor};`}
+          data-split-idx={idx}
+        >
+          <div class="split-card-inner">
+            <span class="split-card-num">0{idx + 1}</span>
+            <h3 class="split-card-title">{card.title}</h3>
+            <p class="split-card-desc">{card.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const section = document.getElementById('splitCardSection');
+    const leftPanel = document.getElementById('splitLeft');
+    const rightPanel = document.getElementById('splitRight');
+    const badge = document.getElementById('splitInitialBadge');
+    const cardsRevealer = document.getElementById('splitCardsRevealer');
+
+    if (section && leftPanel && rightPanel && cardsRevealer) {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: '+=120%',
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true
+        }
+      });
+
+      if (badge) {
+        timeline.to(badge, { opacity: 0, scale: 0.85, duration: 0.2 }, 0);
+      }
+
+      // Linear scrub transforms per motion-interaction-plan.md
+      timeline.to(leftPanel, { xPercent: -100, ease: 'none', duration: 1 }, 0.1);
+      timeline.to(rightPanel, { xPercent: 100, ease: 'none', duration: 1 }, 0.1);
+
+      timeline.fromTo(cardsRevealer,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, ease: 'none', duration: 0.8 },
+        0.3
+      );
+
+      const cardBoxes = cardsRevealer.querySelectorAll('.split-card-box');
+      cardBoxes.forEach((box, i) => {
+        timeline.fromTo(box,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+          0.4 + (i * 0.15)
+        );
+      });
+    }
+  });
+</script>
+
+<style>
+  .scroll-split-card-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .split-viewport {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .split-image-container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .split-panel {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  .split-panel-left {
+    left: 0;
+  }
+
+  .split-panel-right {
+    right: 0;
+  }
+
+  .split-img {
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .split-panel-left .split-img {
+    left: 0;
+  }
+
+  .split-panel-right .split-img {
+    right: 0;
+  }
+
+  .panel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,7,10,0.3) 0%, rgba(5,7,10,0.7) 100%);
+  }
+
+  .split-initial-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    background: rgba(5, 7, 10, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border-gold);
+    border-radius: var(--radius-pill);
+    color: var(--temple-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .badge-ring {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--temple-gold);
+    box-shadow: 0 0 10px var(--temple-gold);
+    animation: pulseRing 1.5s infinite alternate;
+  }
+
+  @keyframes pulseRing {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 1; }
+  }
+
+  .split-cards-revealer {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1150px;
+    width: 90%;
+    padding: 2rem;
+  }
+
+  .split-card-box {
+    border-radius: var(--radius-md);
+    padding: 2.25rem 1.75rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .split-card-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.8);
+  }
+
+  .split-card-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .split-card-num {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .split-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+
+  .split-card-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .split-cards-revealer {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .split-panel-left { transform: translateX(-100%) !important; }
+    .split-panel-right { transform: translateX(100%) !important; }
+    .split-initial-badge { display: none !important; }
+    .split-cards-revealer { opacity: 1 !important; transform: none !important; }
+  }
+</style>

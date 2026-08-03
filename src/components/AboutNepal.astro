@@ -2,24 +2,26 @@
 import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
 ---
 
-<section class="about-section section-bg" id="about">
-  <div class="container">
-    <!-- Section Title matching sample.png style -->
+<section class="about-section" id="about">
+  <div class="container relative-z">
+    <!-- Section Header matching design-brief.md -->
     <div class="section-title-wrap">
       <h2>ABOUT NEPAL</h2>
       <div class="section-title-rule"></div>
     </div>
 
+    <!-- Short Emotional Introduction (IA Section 2) -->
     <div class="about-grid">
       <div class="about-lead">
         <h3 class="about-heading">
           A Sanctuary of Mountains, Ancient Wisdom & Unrivaled Majesty
         </h3>
         <p class="about-text">
-          Nestled between the snowy crests of the world's highest peaks and the verdant valleys of ancient kingdoms, Nepal is a land where nature and spirituality breathe as one. From the birthplace of Lord Buddha in Lumbini to the sacred flame of Pashupatinath, every vista tells a story woven across centuries.
+          Nestled between the snowy crests of the world's highest peaks and ancient valley sanctuaries, Nepal is a land where culture, mountains, heritage, and peace breathe in eternal harmony. From the sacred flame of Pashupatinath to the peaceful gardens of Lumbini, experience a realm like nowhere else on Earth.
         </p>
       </div>
 
+      <!-- 4 Core Pillars (Mountains, Heritage, Peace, Hospitality) -->
       <div class="about-pillars">
         <div class="glass-card pillar-card">
           <Mountain class="pillar-icon" />
@@ -30,13 +32,13 @@ import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
         <div class="glass-card pillar-card">
           <Flame class="pillar-icon" />
           <h4>Sacred Heritage</h4>
-          <p>Millennia of living traditions, golden stupas, and timeless wooden pagoda temples.</p>
+          <p>Millennia of living traditions, golden stupas, and ancient wooden pagoda temples.</p>
         </div>
 
         <div class="glass-card pillar-card">
           <Sun class="pillar-icon" />
           <h4>Peaceful Gardens</h4>
-          <p>Serene lakes, sacred stupa courtyards, and tranquil Himalayan sunrise vistas.</p>
+          <p>Serene lotus ponds, sacred stupa courtyards, and tranquil Himalayan sunrise vistas.</p>
         </div>
 
         <div class="glass-card pillar-card">
@@ -51,8 +53,14 @@ import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
 
 <style>
   .about-section {
-    padding: 12rem 0;
-    background-image: url('https://images.unsplash.com/photo-1526712318848-5f38e2740d44?q=80&w=2000&auto=format&fit=crop');
+    padding: 9rem 0;
+    position: relative;
+    background: transparent;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
   }
 
   .about-grid {
@@ -63,7 +71,7 @@ import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
   }
 
   .about-heading {
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-size: clamp(2rem, 3.8vw, 3rem);
     line-height: 1.25;
     margin-bottom: 1.5rem;
     color: var(--snow-white);
@@ -71,7 +79,7 @@ import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
 
   .about-text {
     font-size: 1.125rem;
-    line-height: 1.9;
+    line-height: 1.8;
     color: var(--mist-slate);
   }
 
@@ -82,7 +90,10 @@ import { Mountain, Flame, Sun, Heart } from '@lucide/astro';
   }
 
   .pillar-card {
-    padding: 2.5rem;
+    padding: 2rem 1.75rem;
+    background: rgba(10, 14, 20, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .pillar-icon {
